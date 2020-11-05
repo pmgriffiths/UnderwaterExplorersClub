@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/HelloWorld.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/MenuScene.unity
+    guid: 259c25b9bb3254bd2886a608465a5bfa
+  - enabled: 1
+    path: Assets/Scenes/UnderwaterScene.unity
+    guid: e407b5dec9fe04a468a9d195b145ef8e
   m_configObjects: {}
