@@ -23,8 +23,7 @@ namespace PodTheDog.UEX
 
         public Vector3 initialVelocity;
 
-        public bool rotateSchool = false;   
-
+        public bool rotateSchool = false;
 
         /// <summary>
         /// Whether the projectile has a particle system.

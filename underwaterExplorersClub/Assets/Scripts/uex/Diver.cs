@@ -14,6 +14,14 @@ namespace PodTheDog.UEX
         public float kickStrength = 1.0f;
         private float waterDrag = -0.01f;
 
+        public Camera photographyCamera;
+        public int photoWidth = 600;
+        public int photoHeight = 400;
+
+        public RenderTexture photographRenderTexture;
+
+        public PhotoPanel photoPanel;
+
         /// <summary>
         /// How long in seconds between kicks when the kick button is held down
         /// </summary>
@@ -27,38 +35,23 @@ namespace PodTheDog.UEX
         {
             characterController = gameObject.GetComponent<CharacterController>();
             lastKickTime = Time.time;
+            photoPanel.HidePanel();
         }
 
         // Update is called once per frame
         void Update()
         {
             Swim();
-        }
 
-        void NotUpdate()
-        { 
-            groundedPlayer = characterController.isGrounded;
-            if (groundedPlayer && playerVelocity.y < 0)
+            if (Input.GetKeyDown("e"))
             {
-                playerVelocity.y = 0f;
+                TakePhotograph();
             }
 
-            Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            characterController.Move(move * Time.deltaTime * currentSpeed);
-
-            if (move != Vector3.zero)
+            if (Input.GetKeyDown("p"))
             {
-                gameObject.transform.forward = move;
+                photoPanel.TogglePanel();
             }
-
-            // Changes the height position of the player..
-            if (Input.GetButtonDown("Jump") && groundedPlayer)
-            {
-                playerVelocity.y += Mathf.Sqrt(kickStrength * -3.0f * waterDrag);
-            }
-
-            // playerVelocity.y += gravityValue * Time.deltaTime;
-            characterController.Move(playerVelocity * Time.deltaTime);
         }
 
         private void Swim()
@@ -104,6 +97,31 @@ namespace PodTheDog.UEX
             }
             
             characterController.Move(gameObject.transform.forward * Time.deltaTime * currentSpeed);
+        }
+
+        private void TakePhotograph()
+        {
+            Texture2D picture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+            Camera mainCamera = Camera.main;
+            RenderTexture tempRenderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
+            mainCamera.enabled = false;
+            photographyCamera.enabled = true;
+            photographyCamera.targetTexture = tempRenderTexture;
+            photographyCamera.Render();
+            RenderTexture.active = tempRenderTexture;
+            Rect photoRect = new Rect(0, 0, Screen.width, Screen.height);
+            picture.ReadPixels(photoRect, 0, 0, false);
+            picture.Apply();
+
+            mainCamera.enabled = true;
+            photographyCamera.enabled = false; 
+
+            RenderTexture.active = null;
+            RenderTexture.ReleaseTemporary(tempRenderTexture); 
+
+            photoPanel.AddPhoto(picture);
+
         }
     }
 }
