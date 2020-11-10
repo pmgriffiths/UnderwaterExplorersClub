@@ -10,14 +10,23 @@ namespace PodTheDog.UEX
 
         private bool groundedPlayer;
         private Vector3 playerVelocity;
-        private float playerSpeed = 0f;
+        private float currentSpeed = 0f;
         public float kickStrength = 1.0f;
         private float waterDrag = -0.01f;
+
+        /// <summary>
+        /// How long in seconds between kicks when the kick button is held down
+        /// </summary>
+        public float kickInterval = 0.2f;
+        private float lastKickTime;
+
+        public float rotationSpeed = 10f;
         
         // Start is called before the first frame update
         void Start()
         {
             characterController = gameObject.GetComponent<CharacterController>();
+            lastKickTime = Time.time;
         }
 
         // Update is called once per frame
@@ -35,7 +44,7 @@ namespace PodTheDog.UEX
             }
 
             Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            characterController.Move(move * Time.deltaTime * playerSpeed);
+            characterController.Move(move * Time.deltaTime * currentSpeed);
 
             if (move != Vector3.zero)
             {
@@ -61,30 +70,40 @@ namespace PodTheDog.UEX
                 playerVelocity.y = 0f;
             }
 
-
+            /*
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             // Vector3 movePosition = gameObject.transform.forward + moveDirection;
-
-            characterController.Move(moveDirection * Time.deltaTime * playerSpeed);
+            // characterController.Move(moveDirection * Time.deltaTime * currentSpeed);
 
             if (moveDirection != Vector3.zero)
             {
                 gameObject.transform.forward -= moveDirection * Time.deltaTime;
-            }
+            } */
+
+            Vector3 currentDirection = gameObject.transform.forward;
+            float rotationLeftRight = Input.GetAxis("Vertical") * rotationSpeed ;
+            float rotationUpDown = Input.GetAxis("Horizontal") * rotationSpeed;
+
+            Vector3 rotation = new Vector3(rotationLeftRight * Time.deltaTime, rotationUpDown * Time.deltaTime, 0);
+            transform.Rotate(rotation);
 
             // Changes the height position of the player..
-            if (Input.GetButtonDown("Jump") && !groundedPlayer)
+            float currentTime = Time.time;
+            if (Input.GetButton("Jump") && !groundedPlayer)
             {
-                playerSpeed += kickStrength;
+                if (currentTime >= lastKickTime + kickInterval)
+                {
+                    currentSpeed += kickStrength;
+                    lastKickTime = currentTime;
+                }
             }
-            playerSpeed += (playerSpeed * waterDrag);
-            if (playerSpeed <= 0)
+            currentSpeed += (currentSpeed * waterDrag);
+            if (currentSpeed <= 0)
             {
-                playerSpeed = 0f;
+                currentSpeed = 0f;
             }
-
-            characterController.Move(gameObject.transform.forward * Time.deltaTime * playerSpeed);
-
+            
+            characterController.Move(gameObject.transform.forward * Time.deltaTime * currentSpeed);
         }
     }
 }
