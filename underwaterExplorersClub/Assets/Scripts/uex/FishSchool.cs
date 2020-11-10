@@ -15,11 +15,9 @@ namespace PodTheDog.UEX
 
         private Rigidbody ourBody;
 
-        public float deflectionDegrees = 120f;
+        public float accelerationTime = 2f;
 
-        public float deflectionTime = 5f;
-
-        public float rotationTime = 2f;
+        public float rotationTime = 1f;
 
         public Transform rotationPoint;
 
@@ -72,7 +70,9 @@ namespace PodTheDog.UEX
             }
 
             ourBody.velocity = initialVelocity;
-            ourBody.transform.rotation = Quaternion.Euler(initialVelocity.normalized);
+            // ourBody.transform.rotation = Quaternion.Euler(initialVelocity.normalized);
+
+            ourBody.transform.forward = initialVelocity;
 
         }
 
@@ -124,7 +124,7 @@ namespace PodTheDog.UEX
 
                     // StartCoroutine(RotateAroundRotationPoint(rotationPoint.position, deflectionDegrees, deflectionTime, other));
                     // StartCoroutine(LerpDirection(ourBody.position, outVelocity, Mathf.Deg2Rad * angleDegrees, other));
-                    StartCoroutine(PassCentre(ourBody.position, outVelocity, Mathf.Deg2Rad * angleDegrees, rotationPoint.position, other));
+                    StartCoroutine(StopRotateAndMove(outDirection, outVelocity, Mathf.Deg2Rad * angleDegrees, other));
 
                 }
             } else
@@ -141,35 +141,7 @@ namespace PodTheDog.UEX
         /// <param name="endVelocity"></param>
         /// <param name="angle">Radians to rotate/param>
         /// <returns></returns>
-        private IEnumerator RotateAroundRotationPoint(Vector3 point, float degrees, float rotationDuration, Collider other)
-        {
-
-            float lerpPos = 0;
-            // Start moving to the centre, then increase velocity to the target velocity.
-            while (lerpPos < 1)
-            {
-                lerpPos += Time.deltaTime / rotationDuration;
-                transform.RotateAround(point, Vector3.up, lerpPos * degrees);
-                yield return null;
-            }
-
-            if (currentCollisions.Contains(other))
-            {
-                currentCollisions.Remove(other);
-            }
-            // re-enable particles;
-            // ps.Play(false);
-        }
-
-
-        /// <summary>
-        /// Lerp the projectile through the centre position towards the end velocity.
-        /// </summary>
-        /// <param name="startPosition"></param>
-        /// <param name="endVelocity"></param>
-        /// <param name="angle">Radians to rotate/param>
-        /// <returns></returns>
-        private IEnumerator PassCentre(Vector3 startPosition, Vector3 endVelocity, float angle, Vector3 centrePosition, Collider other)
+        private IEnumerator StopRotateAndMove(Vector3 endDirection, Vector3 endVelocity, float angle, Collider other)
         {
             // stop particles
             if (hasParticles)
@@ -177,30 +149,26 @@ namespace PodTheDog.UEX
                 ps.Stop(false);
             }
 
-            Debug.Log("PassCentre endVel: " + endVelocity + " angle: " + angle + " other: " + other);
+            Debug.Log("RotateAndMove endVel: " + endVelocity + " angle: " + angle + " other: " + other);
 
             float lerpPos = 0;
-            Vector3 rotation = new Vector3(0, Mathf.Rad2Deg * -angle, 0);
-
+            Vector3 startDirection = transform.forward;
+            ourBody.velocity = Vector3.zero;
             while (lerpPos < 1)
             {
-                lerpPos += Time.deltaTime / deflectionTime;
+                lerpPos += Time.deltaTime / rotationTime;
 
-                ourBody.velocity = Vector3.Lerp(Vector3.zero, endVelocity, lerpPos);
-                Quaternion qRot = Quaternion.Euler(rotation * lerpPos);
-                ourBody.MoveRotation(qRot);
-
+                Vector3 nextRotation = Vector3.Lerp(startDirection, endDirection, lerpPos);
+                transform.forward = nextRotation;
                 yield return null;
             }
 
+            lerpPos = 0;
             while (lerpPos < 1)
             {
-                lerpPos += Time.deltaTime / deflectionTime;
+                lerpPos += Time.deltaTime / accelerationTime;
 
                 ourBody.velocity = Vector3.Lerp(Vector3.zero, endVelocity, lerpPos);
-                Quaternion qRot = Quaternion.Euler(rotation * lerpPos);
-                ourBody.MoveRotation(qRot);
-
                 yield return null;
             }
             // ourBody.transform.rotation = Quaternion.Euler(endVelocity.normalized);
@@ -215,46 +183,6 @@ namespace PodTheDog.UEX
             // ps.Play(false);
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="startVelocity"></param>
-        /// <param name="endVelocity"></param>
-        /// <param name="angle">Radians to rotate/param>
-        /// <returns></returns>
-        private IEnumerator LerpDirection(Vector3 startVelocity, Vector3 endVelocity, float angle, Collider other)
-        {
-            // stop particles
-            if (hasParticles)
-            {
-                ps.Stop(false);
-            }
-
-            Debug.Log("LerpDirection endVel: " + endVelocity + " angle: " + angle + " other: " + other);
-
-            float lerpPos = 0;
-            Vector3 rotation = new Vector3(0, Mathf.Rad2Deg * -angle, 0);
-            while (lerpPos < 1)
-            {
-                lerpPos += Time.deltaTime / deflectionTime;
-
-                ourBody.velocity = Vector3.Lerp(startVelocity, endVelocity, lerpPos);
-                Quaternion qRot = Quaternion.Euler(rotation * lerpPos);
-                ourBody.MoveRotation(qRot);
-
-                yield return null;
-            }
-            ourBody.velocity = endVelocity;
-
-            if (currentCollisions.Contains(other))
-            {
-                currentCollisions.Remove(other);
-            }
-
-            // re-enable particles;
-            // ps.Play(false);
-        }
     }
 
 }
