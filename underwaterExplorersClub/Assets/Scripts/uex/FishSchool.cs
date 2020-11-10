@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PodTheDog.UEX
 {
-    public class FishSchool : MonoBehaviour
+    public class FishSchool : Fish
     {
         private List<Renderer> ourRenderers;
 

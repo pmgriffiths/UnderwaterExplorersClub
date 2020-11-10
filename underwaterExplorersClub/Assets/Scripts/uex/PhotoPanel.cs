@@ -61,13 +61,13 @@ public class PhotoPanel : MonoBehaviour
         }
     }
 
-    public void AddPhoto(Texture2D photo)
+    public void AddPhoto(ScoringPicture photo)
     {
-        Debug.Log("Adding photo " + photo.width + " x " + photo.height);
+        Debug.Log("Adding photo " + photo.picture.width + " x " + photo.picture.height + " score: " + photo.score);
         Debug.Log("Canvas Renderer : " + photo1Renderer);
 
         photo1Image.color = Color.white;
-        photo1Image.texture = photo;
+        photo1Image.texture = photo.picture;
 
 
     }
