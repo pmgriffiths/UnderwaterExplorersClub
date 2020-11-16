@@ -12,7 +12,9 @@ public class ScoringPicture
 
     public List<Fish> fishInPicture;
 
-    public int score;
+    private string fishNames;
+
+    private int score;
 
 
     // Start is called before the first frame update
@@ -28,6 +30,8 @@ public class ScoringPicture
 
         int photoHeight = cameraToCheck.scaledPixelHeight;
         int photoWidth = cameraToCheck.scaledPixelWidth;
+
+        fishNames = "";
         foreach (Fish fish in possibleFish)
         {
             Vector3 pointInPicture = cameraToCheck.WorldToScreenPoint(fish.GetComponentInChildren<Renderer>().bounds.center);
@@ -41,6 +45,8 @@ public class ScoringPicture
                 {
                     // in the picture
                     fishInPicture.Add(fish);
+                    fishNames += fish.name + " ";
+
                     score += fish.score;
 
                     Debug.Log("Found a fish in picture " + fish.fishName + " score: " + fish.score);
@@ -50,5 +56,14 @@ public class ScoringPicture
 
     }
 
+    public string GetFishNames()
+    {
+        return fishNames;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
 
 }
