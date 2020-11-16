@@ -38,6 +38,9 @@ namespace PodTheDog.UEX
         private bool flattening = false;
 
         List<Fish> allFish;
+
+        private float lastInputTime;
+        private float lastInputDelay = 2f;
         
         // Start is called before the first frame update
         void Start()
@@ -86,11 +89,27 @@ namespace PodTheDog.UEX
             }
 
             Vector3 currentDirection = gameObject.transform.forward;
-            float rotationLeftRight = Input.GetAxis("Vertical") * rotationSpeed ;
-            float rotationUpDown = Input.GetAxis("Horizontal") * rotationSpeed;
+            //            float rotationLeftRight = (Input.GetKey("a") ? 1: 0 * rotationSpeed) - (Input.GetKey("d") ? 1 : 0 * rotationSpeed);
+            //            float rotationUpDown = (Input.GetKey("w") ? 1 : 0 * rotationSpeed) - (Input.GetKey("s") ? 1 : 0 * rotationSpeed);
 
-            Vector3 rotation = new Vector3(rotationLeftRight * Time.deltaTime, rotationUpDown * Time.deltaTime, 0);
-            transform.Rotate(rotation);
+            float rotationLeftRight = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+            float rotationUpDown = Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
+
+
+            if (rotationLeftRight != 0 || rotationUpDown != 0)
+            {
+                lastInputTime = Time.time;
+                //                Vector3 rotation = new Vector3(rotationLeftRight * Time.deltaTime, rotationUpDown * Time.deltaTime, 0);
+                //                transform.Rotate(rotation);
+//                transform.Rotate(new Vector3(currentDirection.x + rotationLeftRight, currentDirection.y + rotationUpDown, 0), Space.World);
+
+                // Force flat - HACK
+                Vector3 currentRotation = transform.rotation.eulerAngles;
+                Quaternion floatQ = new Quaternion();
+                floatQ.eulerAngles = new Vector3(currentRotation.x + rotationUpDown, currentRotation.y + rotationLeftRight, 0);
+                transform.rotation = floatQ;
+
+            }
 
             // Changes the height position of the player..
             float currentTime = Time.time;
@@ -100,6 +119,7 @@ namespace PodTheDog.UEX
                 {
                     currentSpeed += kickStrength;
                     lastKickTime = currentTime;
+                    lastInputTime = currentTime;
                 }
             }
 
@@ -109,22 +129,7 @@ namespace PodTheDog.UEX
             {
                 characterController.Move(gameObject.transform.forward * Time.deltaTime * currentSpeed);
                 animator.SetBool("isSwimming", true);
-            } else
-            {
-                currentSpeed = 0f;
-                animator.SetBool("isSwimming", false);
-
-                Vector3 angles = transform.rotation.eulerAngles;
-
-                Debug.Log("stopped: z: " + angles.z);
-                // Lerp towards flat
-                if (!flattening && angles.z > 1f || angles.z < -1f)
-                {
-                    flattening = true;
-                    StopAllCoroutines();
-                    StartCoroutine(FloatFlat());
-                }
-            }
+            } 
 
 
         }
@@ -156,32 +161,6 @@ namespace PodTheDog.UEX
 
             photoPanel.AddPhoto(scoringPicture);
 
-        }
-
-        /// <summary>
-        /// Move the diver back towards z rotation
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator FloatFlat()
-        {
-            Quaternion startRotationQ = transform.rotation;
-            Vector3 startRotation = startRotationQ.eulerAngles;
-            Quaternion floatQ = new Quaternion();
-            floatQ.eulerAngles = new Vector3(startRotation.x, startRotation.y, 0);
-
-            Debug.Log("Starting float lerp from " + startRotation + " to " + floatQ.eulerAngles);
-
-            float lerpPos = 0;
-            while (lerpPos < 1)
-            {
-                lerpPos += Time.deltaTime / flatTime;
-                transform.rotation = Quaternion.Lerp(startRotationQ, floatQ, lerpPos);
-
-                yield return null;
-            }
-
-            transform.rotation = floatQ;
-            flattening = false;
         }
     }
 }
