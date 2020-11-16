@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Fish : MonoBehaviour
 {
-    public string name;
+    public string fishName;
 
     public string description;
 

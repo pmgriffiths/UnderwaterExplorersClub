@@ -43,7 +43,7 @@ public class ScoringPicture
                     fishInPicture.Add(fish);
                     score += fish.score;
 
-                    Debug.Log("Found a fish in picture " + fish.name + " score: " + fish.score);
+                    Debug.Log("Found a fish in picture " + fish.fishName + " score: " + fish.score);
                 }
             }
         }
