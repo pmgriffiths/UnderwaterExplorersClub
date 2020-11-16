@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace PodTheDog.UEX
 {
@@ -21,6 +22,8 @@ namespace PodTheDog.UEX
         public int photoHeight = 400;
 
         public RenderTexture photographRenderTexture;
+
+        private Animator animator;
 
         public PhotoPanel photoPanel;
 
@@ -48,6 +51,12 @@ namespace PodTheDog.UEX
 
             characterController = gameObject.GetComponent<CharacterController>();
             lastKickTime = Time.time;
+
+            animator = GetComponentInChildren<Animator>();
+            Debug.Assert(animator != null);
+
+            photographyCamera.enabled = false;
+
             photoPanel.HidePanel();
         }
 
@@ -99,9 +108,11 @@ namespace PodTheDog.UEX
             if (currentSpeed > 0.1f)
             {
                 characterController.Move(gameObject.transform.forward * Time.deltaTime * currentSpeed);
+                animator.SetBool("isSwimming", true);
             } else
             {
                 currentSpeed = 0f;
+                animator.SetBool("isSwimming", false);
 
                 Vector3 angles = transform.rotation.eulerAngles;
 
