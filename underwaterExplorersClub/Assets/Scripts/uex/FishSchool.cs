@@ -25,6 +25,8 @@ namespace PodTheDog.UEX
 
         public bool rotateSchool = false;
 
+        public bool faceBackwards = false;
+
         /// <summary>
         /// Whether the projectile has a particle system.
         /// </summary>
@@ -71,7 +73,12 @@ namespace PodTheDog.UEX
             ourBody.velocity = initialVelocity;
             // ourBody.transform.rotation = Quaternion.Euler(initialVelocity.normalized);
 
-            ourBody.transform.forward = initialVelocity;
+            if (!faceBackwards)
+                ourBody.transform.forward = initialVelocity;
+            else
+            {
+                ourBody.transform.forward = -initialVelocity;
+            }
 
         }
 
