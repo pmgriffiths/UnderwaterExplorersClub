@@ -160,6 +160,11 @@ namespace PodTheDog.UEX
             float lerpPos = 0;
             Vector3 startDirection = transform.forward;
             ourBody.velocity = Vector3.zero;
+
+            // check for backwards fish
+            if (faceBackwards)
+                endDirection = -endDirection;
+
             while (lerpPos < 1)
             {
                 lerpPos += Time.deltaTime / rotationTime;
@@ -183,6 +188,12 @@ namespace PodTheDog.UEX
             if (currentCollisions.Contains(other))
             {
                 currentCollisions.Remove(other);
+            }
+            if (!faceBackwards)
+                ourBody.transform.forward = endVelocity;
+            else
+            {
+                ourBody.transform.forward = -endVelocity;
             }
 
             // re-enable particles;

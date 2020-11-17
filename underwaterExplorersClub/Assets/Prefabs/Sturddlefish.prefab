@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3410398553734654863}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2160384163160840245}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Fin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,8 @@ GameObject:
   - component: {fileID: 377827487926432866}
   - component: {fileID: 377827487926432867}
   - component: {fileID: 377827487926432892}
-  m_Layer: 0
+  - component: {fileID: 460493391}
+  m_Layer: 10
   m_Name: Sturddlefish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +108,7 @@ Rigidbody:
   m_GameObject: {fileID: 720357999241417547}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.78
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720357999241417547}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3fb87e18a0b3445595ed819451a5e40, type: 3}
   m_Name: 
@@ -165,6 +166,30 @@ MonoBehaviour:
   moveForce: 3
   rotationLikelyHood: 0.01
   rotationAmount: 0.1
+--- !u!114 &460493391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720357999241417547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf84566ac60b486bae4a65626101868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishName: SturddleFish
+  description: 
+  score: 50
+  accelerationTime: 2
+  rotationTime: 1
+  rotationPoint: {fileID: 0}
+  initialVelocity: {x: 1, y: 0, z: 1}
+  rotateSchool: 0
+  faceBackwards: 1
+  hasParticles: 0
+  passThroughCentre: 0
+  forwardFactor: 1
 --- !u!1 &1058965579549531262
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3946648566619443860}
   - component: {fileID: 8209544896147909508}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 759076142716321015}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Fin 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4823998294875160613}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600515536191737433}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Fin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 387310476337116527}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.005_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754001092973589567}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Fin 2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4902626091389070541}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Fin 2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6800522249601022467}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2699532157840576078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9080448955405228399}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475433231590861231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2193164023435407971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.008_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116418503863506060}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7866881519727496859}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.009_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5872877134183872192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bone.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6711866177428428489}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Fin 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
