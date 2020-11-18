@@ -13,7 +13,13 @@ namespace PodTheDog.UEX
 
         }
 
-
+        private void Update()
+        {
+            if (Input.GetKeyDown("s"))
+            {
+                LoadMainScene();
+            }    
+        }
 
         public void LoadMainScene()
         {

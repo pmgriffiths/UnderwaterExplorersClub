@@ -341,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AngleFish (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7223698924232739871, guid: 4cb9421aa2c1048ae834f907798372dc, type: 3}
+      propertyPath: fishName
+      value: Rex
+      objectReference: {fileID: 0}
     - target: {fileID: 8031162003461756577, guid: 4cb9421aa2c1048ae834f907798372dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.86
@@ -511,6 +515,10 @@ PrefabInstance:
     - target: {fileID: 7223698924232739867, guid: 4cb9421aa2c1048ae834f907798372dc, type: 3}
       propertyPath: m_Name
       value: AngleFish (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223698924232739871, guid: 4cb9421aa2c1048ae834f907798372dc, type: 3}
+      propertyPath: fishName
+      value: Wilma
       objectReference: {fileID: 0}
     - target: {fileID: 8031162003461756577, guid: 4cb9421aa2c1048ae834f907798372dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1279,6 +1287,10 @@ PrefabInstance:
     - target: {fileID: 317808762214820755, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: deflectionDegrees
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 317808762214820755, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
+      propertyPath: fishName
+      value: Frank
       objectReference: {fileID: 0}
     - target: {fileID: 1090651549151163093, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3060,6 +3072,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AngleFish2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2397703347587913885, guid: 76d2c73700f08449e9fce5b46bdc5113, type: 3}
+      propertyPath: fishName
+      value: Dotbot
+      objectReference: {fileID: 0}
     - target: {fileID: 3030230755332473382, guid: 76d2c73700f08449e9fce5b46bdc5113, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.22
@@ -3762,6 +3778,10 @@ PrefabInstance:
     - target: {fileID: 317808762214820755, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: deflectionDegrees
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 317808762214820755, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
+      propertyPath: fishName
+      value: Florence
       objectReference: {fileID: 0}
     - target: {fileID: 1090651549151163093, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5698,7 +5718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6973348041467330466, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
       propertyPath: fishName
-      value: School1
+      value: School
       objectReference: {fileID: 0}
     - target: {fileID: 6973348041467330466, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
       propertyPath: deflectionDegrees

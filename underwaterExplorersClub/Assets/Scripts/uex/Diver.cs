@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Animations;
 using PodTheDog.Common;
 
+using UnityEngine.SceneManagement;
+
 namespace PodTheDog.UEX
 {
     public class Diver : MonoBehaviour
@@ -95,6 +97,10 @@ namespace PodTheDog.UEX
                 EmitBubbles();
             }
 
+            if (Input.GetKeyDown("m"))
+            {
+                SceneManager.LoadScene("MenuScene");
+            }
         }
 
         private void Swim()
