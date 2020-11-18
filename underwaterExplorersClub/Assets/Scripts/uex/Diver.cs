@@ -94,6 +94,7 @@ namespace PodTheDog.UEX
                 lastBubbleTime = Time.time;
                 EmitBubbles();
             }
+
         }
 
         private void Swim()
