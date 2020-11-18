@@ -19,5 +19,9 @@ namespace PodTheDog.UEX
 
         public const int SEA_WALLS = 9;
 
+        public const int FISH = 10;
+
+        public const int DIVER = 11;
+
     }
 }

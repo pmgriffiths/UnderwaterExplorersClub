@@ -43,6 +43,8 @@ namespace PodTheDog.UEX
         // how far ahead  to rotate
         public float forwardFactor = 1f;
 
+        public float deflectionDegrees = 30f;
+
         // list of triggers we're already reacting to
         private List<Collider> currentCollisions;
 
@@ -130,7 +132,20 @@ namespace PodTheDog.UEX
 
                     // StartCoroutine(RotateAroundRotationPoint(rotationPoint.position, deflectionDegrees, deflectionTime, other));
                     // StartCoroutine(LerpDirection(ourBody.position, outVelocity, Mathf.Deg2Rad * angleDegrees, other));
-                    StartCoroutine(StopRotateAndMove(outDirection, outVelocity, Mathf.Deg2Rad * angleDegrees, other));
+                    StartCoroutine(StopRotateAndMove(outDirection, outVelocity, Mathf.Deg2Rad * angleDegrees, other, rotationTime, accelerationTime));
+
+                } else if (other.gameObject.layer == LayerConstants.FISH || other.gameObject.layer == LayerConstants.DIVER)
+                {
+                    // Deflect by deflection degrees
+                    StopAllCoroutines(); /// ????
+                    currentCollisions.Add(other);
+
+                    // Deflect ourselves based on the angle between us and the wall
+                    Vector3 outDirection = Quaternion.Euler(0, deflectionDegrees, 0) * ourBody.velocity;
+                    Vector3 outVelocity = outDirection.normalized * ourBody.velocity.magnitude;
+
+                    // Deflection angle
+                    StartCoroutine(StopRotateAndMove(outDirection, outDirection, Mathf.Deg2Rad * deflectionDegrees, other, 1f, 1f));
 
                 }
             } else
@@ -147,7 +162,7 @@ namespace PodTheDog.UEX
         /// <param name="endVelocity"></param>
         /// <param name="angle">Radians to rotate/param>
         /// <returns></returns>
-        private IEnumerator StopRotateAndMove(Vector3 endDirection, Vector3 endVelocity, float angle, Collider other)
+        private IEnumerator StopRotateAndMove(Vector3 endDirection, Vector3 endVelocity, float angle, Collider other, float rotateTime, float speedUpTime)
         {
             // stop particles
             if (hasParticles)
@@ -167,7 +182,7 @@ namespace PodTheDog.UEX
 
             while (lerpPos < 1)
             {
-                lerpPos += Time.deltaTime / rotationTime;
+                lerpPos += Time.deltaTime / rotateTime;
 
                 Vector3 nextRotation = Vector3.Lerp(startDirection, endDirection, lerpPos);
                 transform.forward = nextRotation;
@@ -177,7 +192,7 @@ namespace PodTheDog.UEX
             lerpPos = 0;
             while (lerpPos < 1)
             {
-                lerpPos += Time.deltaTime / accelerationTime;
+                lerpPos += Time.deltaTime / speedUpTime;
 
                 ourBody.velocity = Vector3.Lerp(Vector3.zero, endVelocity, lerpPos);
                 yield return null;

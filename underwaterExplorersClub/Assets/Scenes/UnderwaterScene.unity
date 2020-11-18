@@ -3297,6 +3297,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1721935668}
     m_Modifications:
+    - target: {fileID: 460493391, guid: e3faa161bf6064b1aab4cf37436cf24a, type: 3}
+      propertyPath: deflectionDegrees
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 195037299679234545, guid: e3faa161bf6064b1aab4cf37436cf24a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.9699993
@@ -3341,6 +3345,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 377827487926432866, guid: e3faa161bf6064b1aab4cf37436cf24a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 720357999241417547, guid: e3faa161bf6064b1aab4cf37436cf24a, type: 3}
       propertyPath: m_Name
       value: Sturddlefish
@@ -3369,9 +3377,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1721935668}
     m_Modifications:
+    - target: {fileID: 317808762214819950, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 317808762214819951, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: m_Name
       value: BoxFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 317808762214820755, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
+      propertyPath: deflectionDegrees
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1090651549151163093, guid: 6fad37628b01c4a7e8b97854d15eff1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3443,6 +3459,7 @@ MonoBehaviour:
   hasParticles: 0
   passThroughCentre: 0
   forwardFactor: 1
+  deflectionDegrees: 30
 --- !u!1001 &3568334158044383669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3537,6 +3554,22 @@ PrefabInstance:
     - target: {fileID: 3568334158112108441, guid: 537f37ace3f9640af919042937107cc5, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568334158112108443, guid: 537f37ace3f9640af919042937107cc5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568334158112108443, guid: 537f37ace3f9640af919042937107cc5, type: 3}
+      propertyPath: m_Radius
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568334158112108443, guid: 537f37ace3f9640af919042937107cc5, type: 3}
+      propertyPath: m_Height
+      value: 4.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568334158112108443, guid: 537f37ace3f9640af919042937107cc5, type: 3}
+      propertyPath: m_Direction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3568334158587807999, guid: 537f37ace3f9640af919042937107cc5, type: 3}
       propertyPath: m_Layer
@@ -3669,6 +3702,10 @@ PrefabInstance:
     - target: {fileID: -452197581584900095, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 375353059, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1002558389, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
       propertyPath: m_Layer
@@ -3942,6 +3979,10 @@ PrefabInstance:
       propertyPath: fishName
       value: School1
       objectReference: {fileID: 0}
+    - target: {fileID: 6973348041467330466, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
+      propertyPath: deflectionDegrees
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2bbe2ef668d407c92b827656266005, type: 3}
 --- !u!1001 &8235227495609676566
@@ -3951,6 +3992,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1721935668}
     m_Modifications:
+    - target: {fileID: 8235227495266996890, guid: bc7edb4c783c44703be746751aeadeeb, type: 3}
+      propertyPath: deflectionDegrees
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8485871017651426531, guid: bc7edb4c783c44703be746751aeadeeb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.26
@@ -3994,6 +4039,10 @@ PrefabInstance:
     - target: {fileID: 8485871017651426531, guid: bc7edb4c783c44703be746751aeadeeb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117552940147871300, guid: bc7edb4c783c44703be746751aeadeeb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9117552940147871321, guid: bc7edb4c783c44703be746751aeadeeb, type: 3}
       propertyPath: m_Name
