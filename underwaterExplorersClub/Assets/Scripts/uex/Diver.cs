@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using PodTheDog.Common;
 
 namespace PodTheDog.UEX
 {
@@ -27,6 +28,8 @@ namespace PodTheDog.UEX
 
         public PhotoPanel photoPanel;
 
+        public SoundManager soundManager;
+
         /// <summary>
         /// How long in seconds between kicks when the kick button is held down
         /// </summary>
@@ -41,6 +44,13 @@ namespace PodTheDog.UEX
 
         private float lastInputTime;
         private float lastInputDelay = 2f;
+
+        public Bubbles bubblesPrefab;
+
+        private float lastBubbleTime;
+        public float bubbleInterval = 5f;
+
+        public Transform bubblePoint;
         
         // Start is called before the first frame update
         void Start()
@@ -61,6 +71,7 @@ namespace PodTheDog.UEX
             photographyCamera.enabled = false;
 
             photoPanel.HidePanel();
+            lastBubbleTime = Time.time;
         }
 
         // Update is called once per frame
@@ -76,6 +87,12 @@ namespace PodTheDog.UEX
             if (Input.GetKeyDown("p"))
             {
                 photoPanel.TogglePanel();
+            }
+
+            if (Time.time > lastBubbleTime + bubbleInterval)
+            {
+                lastBubbleTime = Time.time;
+                EmitBubbles();
             }
         }
 
@@ -136,6 +153,7 @@ namespace PodTheDog.UEX
 
         private void TakePhotograph()
         {
+            soundManager.PlayCamera();
             Texture2D picture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
             Camera mainCamera = Camera.main;
@@ -161,6 +179,15 @@ namespace PodTheDog.UEX
 
             photoPanel.AddPhoto(scoringPicture);
 
+            photoPanel.ShowPanel();
+
+        }
+
+        private void EmitBubbles()
+        {
+
+            Bubbles bubbles = Instantiate(bubblesPrefab, bubblePoint);
+            // soundManager.PlayBubbles();
         }
     }
 }
